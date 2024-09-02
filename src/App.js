@@ -1,49 +1,7 @@
+import {useEffect} from "react";
 import Timer from "./components/Timer";
-import { useEffect, useState } from "react";
+import useTimer from "./hooks/useTimer";
 import "./App.css";
-
-const playSound = ({ freq, sec, type }) => {
-  const context = new (window.AudioContext || window.webkitAudioContext)();
-  const oscillator = context.createOscillator();
-  oscillator.type = type; // 波形の種類
-  oscillator.frequency.setValueAtTime(freq, context.currentTime); // 周波数を設定
-  oscillator.connect(context.destination);
-  oscillator.start();
-  oscillator.stop(context.currentTime + sec); // 0.5秒後に停止
-};
-
-const useTimer = (initialTime, lowSoundTimings, highSoundTimings, lowSound, highSound) => {
-  const [time, setTime] = useState(initialTime);
-  const [isRunning, setIsRunning] = useState(false);
-
-  useEffect(() => {
-    if (time === 0) {
-      // setIsRunning(false);
-      reset();
-    }
-  }, [time]);
-
-  useEffect(() => {
-    if (isRunning) {
-      if (lowSoundTimings.includes(time)) {
-        playSound(lowSound);
-      } else if (highSoundTimings.includes(time)) {
-        playSound(highSound);
-      }
-    }
-  }, [time, isRunning]);
-
-  const startPause = () => {
-    setIsRunning((prevIsRunning) => !prevIsRunning);
-  };
-
-  const reset = () => {
-    setTime(initialTime);
-    setIsRunning(false);
-  };
-
-  return { time, setTime, isRunning, startPause, reset }
-}
 
 function App() {
   const MAIN_TIME = 60 * 2 + 3;
