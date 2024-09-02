@@ -5,13 +5,14 @@ const useTimer = (initialTime, lowSoundTimings, highSoundTimings, lowSound, high
     const [time, setTime] = useState(initialTime);
     const [isRunning, setIsRunning] = useState(false);
   
+    // タイマーが0になったらリセット
     useEffect(() => {
       if (time === 0) {
-        // setIsRunning(false);
         reset();
       }
     }, [time]);
   
+    // タイマーが動いている時に音を鳴らす
     useEffect(() => {
       if (isRunning) {
         if (lowSoundTimings.includes(time)) {

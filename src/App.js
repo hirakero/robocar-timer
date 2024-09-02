@@ -18,12 +18,14 @@ function App() {
   const mainTimer = useTimer(MAIN_TIME, MAIN_LOW_SOUND_TIMINGS, MAIN_HIGH_SOUND_TIMINGS, MAIN_LOW_SOUND, MAIN_HIGH_SOUND);
   const penaltyTimer = useTimer(PENALTY_TIME, PENALTY_LOW_SOUND_TIMINGS, PENALTY_HIGH_SOUND_TIMINGS, PENALTY_LOW_SOUND, PENALTY_HIGH_SOUND);
 
+  // メインタイマーが0になったらペナルティタイマーをリセット
   useEffect(() => {
     if (mainTimer.time === 0) {
       penaltyTimer.reset();
     }
   }, [mainTimer.time, penaltyTimer]);
 
+  // メインタイマーが動いている時のみ、ペナルティタイマーを動作させる
   const handlePenaltyStartPause = () => {
     if (mainTimer.isRunning) {
       penaltyTimer.startPause();

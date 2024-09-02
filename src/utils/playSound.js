@@ -5,7 +5,7 @@ const playSound = ({ freq, sec, type }) => {
     oscillator.frequency.setValueAtTime(freq, context.currentTime); // 周波数を設定
     oscillator.connect(context.destination);
     oscillator.start();
-    oscillator.stop(context.currentTime + sec); // 0.5秒後に停止
+    oscillator.stop(context.currentTime + sec); // sec秒後に停止
   };
   
   export default playSound;
