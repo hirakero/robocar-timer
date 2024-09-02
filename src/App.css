@@ -1,0 +1,33 @@
+.app {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .main-running {
+    background-color: lightgreen;
+  }
+  
+  .penalty-running {
+    background-color: lightsalmon;
+  }
+  
+  .stopped {
+    background-color: gray;
+  }
+  
+  .timer {
+    margin: 20px;
+  }
+  
+  .main-timer h2 {
+    font-size: 2em;
+  }
+  
+  .penalty-timer h2 {
+    font-size: 1.5em;
+  }
+  
+  button {
+    margin: 5px;
+    padding: 10px;
+  }

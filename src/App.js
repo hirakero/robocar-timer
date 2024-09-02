@@ -1,5 +1,6 @@
 import Timer from "./components/Timer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import './App.css';
 
 function App() {
   //試合の長さを定数で設定
@@ -10,6 +11,20 @@ function App() {
   const [isMainRunning, setIsMainRunning] = useState(false);
   const [penaltyTime, setPenaltyTime] = useState(PENALTY_TIME);
   const [isPenaltyRunning, setIsPenaltyRunning] = useState(false);
+
+  useEffect(() => {
+    if (mainTime === 0) {
+      setIsMainRunning(false);
+      setIsPenaltyRunning(false);
+    }
+  },[mainTime])
+
+  useEffect(() => {
+    if (penaltyTime === 0) {
+      setPenaltyTime(PENALTY_TIME);
+      setIsPenaltyRunning(false);    
+    }
+  },[penaltyTime])
 
   const handleMainStartPause = () => {
     setIsMainRunning(prevIsMainRunning => !prevIsMainRunning);
@@ -30,10 +45,25 @@ function App() {
     setIsPenaltyRunning(false);
   }
 
+  //classNameのmain-running, penalty-running, stoppedを設定
+  function setClassName(){
+    if(isMainRunning){
+      if(isPenaltyRunning){
+        return 'penalty-running';
+      }else{
+        return 'main-running';
+      }
+    }else {
+      return 'stopped';
+    }
+  }
+
   return (
-    <div >
-      <header>        
+    <div className={`app ${setClassName()}`}>
+      <header> 
+        <h1>
         Timer App
+        </h1>        
       </header>
       <main>        
           <Timer
