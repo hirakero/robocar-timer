@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/robocar-timer/static/css/main.1de8a38d.css",
+    "main.js": "/robocar-timer/static/js/main.e9162eef.js",
+    "static/js/453.3f97ae81.chunk.js": "/robocar-timer/static/js/453.3f97ae81.chunk.js",
+    "index.html": "/robocar-timer/index.html",
+    "main.1de8a38d.css.map": "/robocar-timer/static/css/main.1de8a38d.css.map",
+    "main.e9162eef.js.map": "/robocar-timer/static/js/main.e9162eef.js.map",
+    "453.3f97ae81.chunk.js.map": "/robocar-timer/static/js/453.3f97ae81.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1de8a38d.css",
+    "static/js/main.e9162eef.js"
+  ]
+}
