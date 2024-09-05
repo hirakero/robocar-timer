@@ -81,7 +81,7 @@ function App() {
           onReset={penaltyTimer.reset}
         />
       </main>
-      <footer>---</footer>
+      <footer>ver.0.1.1</footer>
     </div>
   );
 }

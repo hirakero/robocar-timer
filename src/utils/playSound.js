@@ -1,5 +1,12 @@
+let audioContext;
+
+let getAudioContext = () => {
+  audioContext = audioContext || new (window.AudioContext || window.webkitAudioContext)();
+  return audioContext;
+}
+
 const playSound = ({ freq, sec, type, vol = 0.5 }) => {
-    const context = new (window.AudioContext || window.webkitAudioContext)();
+    const context = getAudioContext();
     const oscillator = context.createOscillator();
     const gain = context.createGain();
 
