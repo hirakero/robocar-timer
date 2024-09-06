@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-function Timer({label, time, setTime, isRunning, onStartPause, onReset}) {
+function Timer({label, time, setTime, isRunning, onStartPause, onReset, mainFontSize, runningColor}) {
     useEffect(() => {
         if (isRunning) {
             const timer = setInterval(() => {
@@ -13,11 +13,17 @@ function Timer({label, time, setTime, isRunning, onStartPause, onReset}) {
         }
     }, [isRunning, setTime]);
     return (
-        <div className={`timer ${label.toLowerCase()}-timer`}> 
-            <h2>{label} Timer: {time}s</h2>
-            <button onClick={onStartPause}>{isRunning ? "Pause" : "Start"}</button>
-            <button onClick={onReset}>Reset</button>
+        <div className="card text-center my-3">
+            <div className={`card-header ${isRunning ? runningColor :""}`}>         
+                <h2 className="">{label}</h2>
+            </div>
+            <div className="card-body">
+                <h3 className={`card-text ${mainFontSize}`}>{time} s </h3>
+                <button className="btn btn-primary btn-lg mx-2" onClick={onStartPause}>{isRunning ? "Pause" : "Start"}</button>
+                <button className="btn btn-secondary mx-2" onClick={onReset}>Reset</button>
+            </div>
         </div>
+        
     )
 }
 

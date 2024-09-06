@@ -1,7 +1,6 @@
 import {useEffect} from "react";
 import Timer from "./components/Timer";
 import useTimer from "./hooks/useTimer";
-import "./App.css";
 
 function App() {
   const BEEP_VOLUME = 1.0;
@@ -53,13 +52,8 @@ function App() {
   }
 
   return (
-    <div
-      className={`app ${getBGClassName(
-        mainTimer.isRunning,
-        penaltyTimer.isRunning
-      )}`}
-    >
-      <header>
+    <div className="container text-center py-4">
+      <header className="mb-4">
         <h1>Timer App</h1>
       </header>
       <main>
@@ -70,6 +64,8 @@ function App() {
           isRunning={mainTimer.isRunning}
           onStartPause={mainTimer.startPause}
           onReset={mainTimer.reset}
+          mainFontSize="fs-1"
+          runningColor="bg-primary-subtle"
         />
 
         <Timer
@@ -79,9 +75,14 @@ function App() {
           isRunning={penaltyTimer.isRunning}
           onStartPause={handlePenaltyStartPause}
           onReset={penaltyTimer.reset}
+          mainFontSize=""
+          runningColor="bg-warning-subtle"
+
         />
       </main>
-      <footer>ver.0.1.1</footer>
+      <footer >
+        ver.0.2.0
+      </footer>
     </div>
   );
 }
