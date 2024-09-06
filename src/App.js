@@ -4,15 +4,15 @@ import useTimer from "./hooks/useTimer";
 import "./App.css";
 
 function App() {
-  const vol = 1.0;
+  const BEEP_VOLUME = 1.0;
   const MAIN_TIME = 60 * 2 + 3;
   const PENALTY_TIME = 10;
-  const MAIN_LOW_SOUND = { type: "sine", freq: 440, sec: 0.2, vol: vol };
-  const MAIN_HIGH_SOUND = { type: "sine", freq: 880, sec: 1.0, vol: vol };
+  const MAIN_LOW_SOUND = { type: "sine", freq: 440, sec: 0.2, vol: BEEP_VOLUME };
+  const MAIN_HIGH_SOUND = { type: "sine", freq: 880, sec: 1.0, vol: BEEP_VOLUME };
   const MAIN_LOW_SOUND_TIMINGS = [123, 122, 121, 15, 10, 5, 4, 3, 2, 1];
   const MAIN_HIGH_SOUND_TIMINGS = [120, 90, 60, 30, 0];
-  const PENALTY_LOW_SOUND = { type: "square", freq: 329.6, sec: 0.1, vol: vol };
-  const PENALTY_HIGH_SOUND = { type: "square", freq: 659.3, sec: 0.5,vol: vol };
+  const PENALTY_LOW_SOUND = { type: "square", freq: 329.6, sec: 0.1, vol: BEEP_VOLUME };
+  const PENALTY_HIGH_SOUND = { type: "square", freq: 659.3, sec: 0.5,vol: BEEP_VOLUME };
   const PENALTY_LOW_SOUND_TIMINGS = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
   const PENALTY_HIGH_SOUND_TIMINGS = [0];
 
@@ -56,7 +56,7 @@ function App() {
     <div
       className={`app ${getBGClassName(
         mainTimer.isRunning,
-        penaltyTimer.isMainRunning
+        penaltyTimer.isRunning
       )}`}
     >
       <header>
