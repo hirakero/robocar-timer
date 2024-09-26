@@ -1,6 +1,7 @@
 import {useEffect} from "react";
 import Timer from "./components/Timer";
 import useTimer from "./hooks/useTimer";
+import "./App.css";
 
 function App() {
   const BEEP_VOLUME = 1.0;
@@ -44,41 +45,38 @@ function App() {
     }
   };
 
-  function getBGClassName(isMainRunning, isPenaltyRunning) {
-    if (isMainRunning) {
-      return isPenaltyRunning ? "penalty-running" : "main-running";
-    }
-    return "stopped";
-  }
-
   return (
     <div className="container text-center py-4">
       <header className="mb-4">
         <h1>Timer App</h1>
       </header>
-      <main>
-        <Timer
-          label="Main"
-          time={mainTimer.time}
-          setTime={mainTimer.setTime}
-          isRunning={mainTimer.isRunning}
-          onStartPause={mainTimer.startPause}
-          onReset={mainTimer.reset}
-          mainFontSize="fs-1"
-          runningColor="bg-primary-subtle"
-        />
-
-        <Timer
-          label="Penalty"
-          time={penaltyTimer.time}
-          setTime={penaltyTimer.setTime}
-          isRunning={penaltyTimer.isRunning}
-          onStartPause={handlePenaltyStartPause}
-          onReset={penaltyTimer.reset}
-          mainFontSize=""
-          runningColor="bg-warning-subtle"
-
-        />
+      <main className="row">
+        <div className="col-12 col-md-6 mb-3">
+          <Timer
+            // className="col-sd-6"
+            label="Main"
+            time={mainTimer.time}
+            setTime={mainTimer.setTime}
+            isRunning={mainTimer.isRunning}
+            onStartPause={mainTimer.startPause}
+            onReset={mainTimer.reset}
+            mainFontSize="fs-0"
+            runningColor="bg-primary-subtle"
+          />
+        </div>
+        <div className="col-12 col-md-6 mb-3">
+          <Timer
+            // className="col-sd-6"
+            label="Penalty"
+            time={penaltyTimer.time}
+            setTime={penaltyTimer.setTime}
+            isRunning={penaltyTimer.isRunning}
+            onStartPause={handlePenaltyStartPause}
+            onReset={penaltyTimer.reset}
+            mainFontSize="fs-1"
+            runningColor="bg-warning-subtle"
+          />
+        </div>
       </main>
       <footer >
         ver.0.2.0
