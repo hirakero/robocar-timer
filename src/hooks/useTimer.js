@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import playSound from '../utils/playSound';
 
-const useTimer = (initialTime, lowSoundTimings, highSoundTimings, lowSound, highSound) => {
-    const [time, setTime] = useState(initialTime);
+const useTimer = (initialTime, prepareTime, lowSoundTimings, highSoundTimings, lowSound, highSound) => {
+    const [time, setTime] = useState(initialTime + prepareTime);
     const [isRunning, setIsRunning] = useState(false);
   
     // タイマーが0になったらリセット
@@ -28,7 +28,7 @@ const useTimer = (initialTime, lowSoundTimings, highSoundTimings, lowSound, high
     };
   
     const reset = () => {
-      setTime(initialTime);
+      setTime(initialTime + prepareTime);
       setIsRunning(false);
     };
   
