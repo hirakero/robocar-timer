@@ -1,7 +1,8 @@
-import {useEffect} from "react";
+import { useEffect } from "react";
 import Timer from "./components/Timer";
 import useTimer from "./hooks/useTimer";
 import "./App.css";
+import { playSound, talkText } from "./utils/playSound";
 
 function App() {
   const BEEP_VOLUME = 1.0;
@@ -9,31 +10,67 @@ function App() {
   const MAIN_PREPARE_DURATION = 3;
   const PENALTY_DURATION = 10;
   const PENALTY_PREPARE_DURATION = 0;
-  const MAIN_LOW_SOUND = { type: "sine", freq: 440, sec: 0.2, vol: BEEP_VOLUME };
-  const MAIN_HIGH_SOUND = { type: "sine", freq: 880, sec: 1.0, vol: BEEP_VOLUME };
-  const MAIN_LOW_SOUND_TIMINGS = [123, 122, 121, 15, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
-  const MAIN_HIGH_SOUND_TIMINGS = [120, 90, 60, 30, 0];
-  const PENALTY_LOW_SOUND = { type: "square", freq: 329.6, sec: 0.1, vol: BEEP_VOLUME };
-  const PENALTY_HIGH_SOUND = { type: "square", freq: 659.3, sec: 0.5,vol: BEEP_VOLUME };
-  const PENALTY_LOW_SOUND_TIMINGS = [9, 8, 7, 6, 5, 4, 3, 2, 1];
-  const PENALTY_HIGH_SOUND_TIMINGS = [0];
 
-  const mainTimer = useTimer(
-    MAIN_DURATION,
-    MAIN_PREPARE_DURATION,
-    MAIN_LOW_SOUND_TIMINGS,
-    MAIN_HIGH_SOUND_TIMINGS,
-    MAIN_LOW_SOUND,
-    MAIN_HIGH_SOUND,
-  );
-  const penaltyTimer = useTimer(
-    PENALTY_DURATION,
-    PENALTY_PREPARE_DURATION,
-    PENALTY_LOW_SOUND_TIMINGS,
-    PENALTY_HIGH_SOUND_TIMINGS,
-    PENALTY_LOW_SOUND,
-    PENALTY_HIGH_SOUND
-  );
+  const MAIN_LOW_BEEP_SOUND = {
+    type: "sine",
+    freq: 440,
+    sec: 0.2,
+    vol: BEEP_VOLUME,
+  };
+  const MAIN_HIGH_BEEP_SOUND = {
+    type: "sine",
+    freq: 880,
+    sec: 1.0,
+    vol: BEEP_VOLUME,
+  };
+  const PENALTY_LOW_SOUND = {
+    type: "square",
+    freq: 329.6,
+    sec: 0.1,
+    vol: BEEP_VOLUME,
+  };
+  const PENALTY_HIGH_SOUND = {
+    type: "square",
+    freq: 659.3,
+    sec: 0.5,
+    vol: BEEP_VOLUME,
+  };
+
+  const mainSounds = [];
+  mainSounds[120] = { play: playSound, data: MAIN_HIGH_BEEP_SOUND };
+  mainSounds[0] = { play: playSound, data: MAIN_HIGH_BEEP_SOUND };
+
+  const mainTalks = [10, 15, 30, 60, 90];
+  mainTalks.forEach((i) => {
+    mainSounds[i] = { play: talkText, data: `${i}秒前` };
+  });
+  
+  const mainLowBeeps = [121, 122, 123];
+  mainLowBeeps.forEach((i) => {
+    mainSounds[i] = { play: playSound, data: MAIN_LOW_BEEP_SOUND };
+  });
+  const mainSec = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  mainSec.forEach((i) => {
+    mainSounds[i] = { play: talkText, data: `${i}` };
+  });
+
+  const penaltySounds = [];
+  const penaltySecs = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  penaltySecs.forEach((i) => {
+    penaltySounds[i] = { play: playSound, data: PENALTY_LOW_SOUND };
+  });
+  penaltySounds[0] = { play: playSound, data: PENALTY_HIGH_SOUND };
+
+  const mainTimer = useTimer({
+    initialTime: MAIN_DURATION,
+    prepareTime: MAIN_PREPARE_DURATION,
+    sounds: mainSounds,
+  });
+  const penaltyTimer = useTimer({
+    initialTime: PENALTY_DURATION,
+    prepareTime: PENALTY_PREPARE_DURATION,
+    sounds: penaltySounds,
+  });
 
   // メインタイマーが0になったらペナルティタイマーをリセット
   useEffect(() => {
@@ -57,7 +94,6 @@ function App() {
       <main className="row">
         <div className="col-12 col-md-6 mb-3">
           <Timer
-            // className="col-sd-6"
             label="Main"
             time={mainTimer.time}
             setTime={mainTimer.setTime}
@@ -71,7 +107,6 @@ function App() {
         </div>
         <div className="col-12 col-md-6 mb-3">
           <Timer
-            // className="col-sd-6"
             label="Penalty"
             time={penaltyTimer.time}
             setTime={penaltyTimer.setTime}
@@ -80,13 +115,11 @@ function App() {
             onReset={penaltyTimer.reset}
             mainFontSize="fs-0"
             runningColor="bg-warning-subtle"
-            initialTime={PENALTY_DURATION}       
+            initialTime={PENALTY_DURATION}
           />
         </div>
       </main>
-      <footer >
-        ver.0.2.1
-      </footer>
+      <footer>ver.0.2.2</footer>
     </div>
   );
 }
