@@ -2,6 +2,8 @@ import Timer from "../components/Timer";
 import useTimer from "../hooks/useTimer";
 import { playSound, talkText } from "../utils/playSound";
 import { useEffect } from "react";
+import { BsGear} from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
     const BEEP_VOLUME = 1.0;
@@ -89,6 +91,8 @@ export const Home = () => {
       <div className="container text-center py-4">
         <header className="mb-4">
           <h1>Timer App</h1>
+          
+          <Link to="/settings"> < BsGear />settings</Link>
         </header>
         <main className="row">
           <div className="col-12 col-md-6 mb-3">
