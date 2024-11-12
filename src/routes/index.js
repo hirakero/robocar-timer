@@ -1,8 +1,12 @@
-import {RouteObject} from 'react-router-dom';
 import {Home} from '../pages/Home';
 import { Settings } from '../pages/Settings';
+import { Layout } from '../components/Layout';
 
-export const AppRoutes = [
-  { path: "/", element: <Home /> },
-  { path: "/settings", element: <Settings /> }
-];
+export const AppRoutes = [{
+  path: "/",
+  element: <Layout />,
+  children: [
+    { index: true, element: <Home /> },
+    { path: "settings", element: <Settings /> }  
+  ],
+}];

@@ -88,13 +88,8 @@ export const Home = () => {
     };
   
     return (
-      <div className="container text-center py-4">
-        <header className="mb-4">
-          <h1>Timer App</h1>
-          
-          <Link to="/settings"> < BsGear />settings</Link>
-        </header>
-        <main className="row">
+        <>
+          <Link to="/settings"> < BsGear /></Link>
           <div className="col-12 col-md-6 mb-3">
             <Timer
               label="Main"
@@ -121,9 +116,7 @@ export const Home = () => {
               initialTime={PENALTY_DURATION}
             />
           </div>
-        </main>
-        <footer>ver.0.2.2</footer>
-      </div>
+        </>
     );
   }
   
