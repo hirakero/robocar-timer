@@ -1,40 +1,44 @@
 import Timer from "../components/Timer";
 import useTimer from "../hooks/useTimer";
 import { playSound, talkText } from "../utils/playSound";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { BsGear} from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { SettingsContext } from "../context/SettingsContext";
 
 export const Home = () => {
-    const BEEP_VOLUME = 1.0;
-    const MAIN_DURATION = 60 * 2;
+    const {settings} = useContext(SettingsContext);
+    const VOLUME = settings.volume;
+    const MAIN_DURATION = settings.mainDuration;
     const MAIN_PREPARE_DURATION = 3;
-    const PENALTY_DURATION = 10;
+    const PENALTY_DURATION = settings.penaltyDuration;
     const PENALTY_PREPARE_DURATION = 0;
   
+    // console.log("volume", settings.volume)
+    console.log("home setteings", settings)
     const MAIN_LOW_BEEP_SOUND = {
       type: "sine",
       freq: 440,
       sec: 0.2,
-      vol: BEEP_VOLUME,
+      vol: VOLUME,
     };
     const MAIN_HIGH_BEEP_SOUND = {
       type: "sine",
       freq: 880,
       sec: 1.0,
-      vol: BEEP_VOLUME,
+      vol: VOLUME,
     };
     const PENALTY_LOW_SOUND = {
       type: "square",
       freq: 329.6,
       sec: 0.1,
-      vol: BEEP_VOLUME,
+      vol: VOLUME,
     };
     const PENALTY_HIGH_SOUND = {
       type: "square",
       freq: 659.3,
       sec: 0.5,
-      vol: BEEP_VOLUME,
+      vol: VOLUME,
     };
   
     const mainSounds = [];

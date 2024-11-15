@@ -1,23 +1,26 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import {BsArrowLeft} from 'react-icons/bs';
-
 import { Link } from "react-router-dom"
 import { SettingItem } from '../components/SettingItem';
+import {SettingsContext} from '../context/SettingsContext';
 
-export const Settings = () => {
-    const [volume, setVolume] = useState(100);
+export const Settings = ({volume,setVolume}) => {
+    const {settings, updateSettings} = useContext(SettingsContext);
     return (
         <>
             <Link to="/"><BsArrowLeft/></Link>
-            <h2>settings</h2>
+            <h2>settings</h2> 
             <div className='container'>
                 <SettingItem label="Volume">
                     <input 
                         type="range" 
-                        value={volume}
-                        onChange={(e)=> setVolume(parseFloat(e.target.value))}
+                        min = {0.0}
+                        max = {1.0}
+                        step = {0.1}
+                        value={settings.volume}
+                        onChange={(e)=> updateSettings({ volume: parseFloat(e.target.value) })}
                     />
-                    <span>{volume}</span>
+                    <span>{settings.volume}</span>
                 </SettingItem>
                 <SettingItem label="Sound Type">
                     <select defaultValue={"voice"} disabled={true}>
@@ -26,10 +29,10 @@ export const Settings = () => {
                     </select>
                 </SettingItem>
                 <SettingItem label="Main Duration">
-                    120
+                    {settings.mainDuration}
                 </SettingItem>
                 <SettingItem label="Penalty Duration">
-                    10
+                    {settings.penaltyDuration}
                 </SettingItem>
             </div>           
         </>
