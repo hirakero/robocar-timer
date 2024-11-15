@@ -8,9 +8,13 @@ export const Settings = ({volume,setVolume}) => {
     const {settings, updateSettings} = useContext(SettingsContext);
     return (
         <>
-            <Link to="/"><BsArrowLeft/></Link>
-            <h2>settings</h2> 
+            <div className="row">                
+                <div className='col-1'>                    
+                    <Link to="/" className="float-start"><BsArrowLeft/></Link>
+                </div>
+            </div>
             <div className='container'>
+                <h2>settings</h2> 
                 <SettingItem label="Volume">
                     <input 
                         type="range" 

@@ -14,8 +14,6 @@ export const Home = () => {
     const PENALTY_DURATION = settings.penaltyDuration;
     const PENALTY_PREPARE_DURATION = 0;
   
-    // console.log("volume", settings.volume)
-    console.log("home setteings", settings)
     const MAIN_LOW_BEEP_SOUND = {
       type: "sine",
       freq: 440,
@@ -93,7 +91,10 @@ export const Home = () => {
   
     return (
         <>
-          <Link to="/settings"> < BsGear /></Link>
+          <div className="row">
+            <div className="col-11"></div>
+            <Link to="/settings" className="col-1"> < BsGear /></Link>
+          </div>
           <div className="col-12 col-md-6 mb-3">
             <Timer
               label="Main"

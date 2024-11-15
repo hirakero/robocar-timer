@@ -9,7 +9,7 @@ export const Layout = ()=>{
             <main className="row">
                 <Outlet />
             </main>
-            <footer>ver.0.2.2</footer>
+            <footer>ver.0.2.3</footer>
         </div>
     )
 }

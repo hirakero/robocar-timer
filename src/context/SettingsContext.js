@@ -18,16 +18,13 @@ export const SettingsProvider = ({children}) => {
     },[]);
 
     const updateSettings = (newSettings) => {
-        console.log("update")
         setSettings((prevSettings) => {
             const mergedSettings = {...prevSettings, ...newSettings};
-            console.log(mergedSettings)
             saveSettings(mergedSettings);
             return mergedSettings;
         });
     };
 
-    console.log("settings", settings)
     return (
         <SettingsContext.Provider value={{settings, updateSettings}}>
             {children}
