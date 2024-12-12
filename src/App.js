@@ -1,9 +1,11 @@
 import "./App.css";
-import { createBrowserRouter,RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { AppRoutes } from "./routes";
 import { SettingsProvider } from "./context/SettingsContext";
 
-const router = createBrowserRouter(AppRoutes);
+const router = createBrowserRouter(AppRoutes,{
+  basename: "/robocar-timer",
+});
 
 function App(){
   return (
